@@ -22,7 +22,7 @@
 
 use Getopt::Long;
 
-GetOptions('ref=s' => \my $ref, 'cand=s' => \my $cand, );
+GetOptions("ref=s" => \my $ref, "cand=s" => \my $cand, );
 
 # locate the exact reference file here, i.e. ending with the name of the file, not only the directory.
 # put the address of reference translation document here
@@ -79,9 +79,9 @@ if (!(-d $cand)) {
     }
     $sentence_num = $i;
     close TEST;
-    print 'length of sysoutput:', "\n", "@arry_sys_length", "\n", $sentence_num, "\n";
+    print "length of sysoutput: ", "@arry_sys_length", "\n", $sentence_num, "\n";
 
-    print 'length of reference:', "\n", "@arry_ref_length", "\n", $num_of_ref_sentence, "\n";
+    print "length of reference: ", "@arry_ref_length", "\n", $num_of_ref_sentence, "\n";
 
     @LP = ();
     # @LP store the longth penalty coefficient of every LP[i]
@@ -105,14 +105,14 @@ if (!(-d $cand)) {
             }
         }
     }
-    print 'length penalty with longer or shorter:', "\n", "@LP", "\n", $k, "\n";
+    print "length penalty with longer or shorter: ", "@LP", "\n", $k, "\n";
     $Mean_LP = 0;
     for ($k = 0; $k < $sentence_num; $k++) {
         $Mean_LP = $Mean_LP + $LP[$k];
     }
     $Mean_LP = $Mean_LP / $sentence_num;
     # $Mean_LP = $Mean_LP / 2051;
-    print 'mean of length penalty with longer or shorter:', "\n", "$Mean_LP", "\n", $k, "\n";
+    print "mean of length penalty with longer or shorter: ", "$Mean_LP", "\n", $k, "\n";
 
     @common_num = ();
     # store the common number between sys and ref into @common_num
@@ -138,7 +138,7 @@ if (!(-d $cand)) {
             }
         }
     }
-    print 'common number between sys and ref:', "\n", "@common_num", "\n", $i, "\n";
+    print "common number between sys and ref: ", "@common_num", "\n", $i, "\n";
 
     @P = ();
     @R = ();
@@ -152,8 +152,8 @@ if (!(-d $cand)) {
             $R[$i] = 0;
         }
     }
-    print 'precision of sys:', "\n", "@P", "\n", $i, "\n";
-    print 'recall of sys:', "\n", "@R", "\n", $i, "\n";
+    print "precision of sys: ", "@P", "\n", $i, "\n";
+    print "recall of sys: ", "@R", "\n", $i, "\n";
 
     $Mean_precision = 0;
     $Mean_recall = 0;
@@ -163,8 +163,8 @@ if (!(-d $cand)) {
     }
     $Mean_precision = $Mean_precision / $sentence_num;
     $Mean_recall = $Mean_recall / $sentence_num;
-    print 'mean precision of sys:', "\n", "$Mean_precision", "\n", $i, "\n";
-    print 'mean recall of sys:', "\n", "$Mean_recall", "\n", $i, "\n";
+    print "mean precision of sys: ", "$Mean_precision", "\n", $i, "\n";
+    print "mean recall of sys: ", "$Mean_recall", "\n", $i, "\n";
 
     # $a is a variable to be changed according to different language envirenment # # # # H(P, 9 R)
     $a = 9;
@@ -184,14 +184,14 @@ if (!(-d $cand)) {
             $Harmonic_mean_PR[$i] = 0;
         }
     }
-    print 'harmonic of precision and recall:', "\n", "@Harmonic_mean_PR", "\n", $i, "\n";
+    print "harmonic of precision and recall: ", "@Harmonic_mean_PR", "\n", $i, "\n";
 
     $Mean_HarmonicMean = 0;
     for ($i = 0; $i < $sentence_num; $i++) {
         $Mean_HarmonicMean = $Mean_HarmonicMean + $Harmonic_mean_PR[$i];
     }
     $Mean_HarmonicMean = $Mean_HarmonicMean / $sentence_num;
-    print 'mean of every sentences harmonic-mean of precision and recall:', "\n", "$Mean_HarmonicMean", "\n", $i, "\n";
+    print "mean of every sentences harmonic-mean of precision and recall: ", "$Mean_HarmonicMean", "\n", $i, "\n";
 
     @pos_dif = ();
     @pos_dif_record = ();
@@ -352,13 +352,13 @@ if (!(-d $cand)) {
         # calculate the every sentence's value of Pos_dif_value by taking the exp.
         # $Pos_dif_value[$i] = exp(-$Pos_dif_sum[$i]);
     }
-    print 'Position different penalty:', "\n", "@Pos_dif_value", "\n", $i, "\n";
+    print "Position different penalty: ", "@Pos_dif_value", "\n", $i, "\n";
     $Mean_pos_dif_value = 0;
     for ($i = 0; $i < $sentence_num; $i++) {
         $Mean_pos_dif_value = $Mean_pos_dif_value + $Pos_dif_value[$i];
     }
     $Mean_pos_dif_value = $Mean_pos_dif_value / $sentence_num;
-    print 'mean Position different penalty:', "\n", "$Mean_pos_dif_value", "\n", $i, "\n";
+    print "mean Position different penalty: ", "$Mean_pos_dif_value", "\n", $i, "\n";
 
     # HLEPOR means a new version of MT evaluation metric LEPOR calculated by the harmonic mean of its parameters(not just multiply them)
     @HLEPOR_single_sentence = ();
@@ -381,8 +381,8 @@ if (!(-d $cand)) {
         $HLEPOR = $HLEPOR + $HLEPOR_single_sentence[$i];
     }
     $HLEPOR = $HLEPOR / $sentence_num;
-    print 'evaluation value HLEPOR of every single sentence:', "\n", "@HLEPOR_single_sentence", "\n", $i, "\n";
-    print 'mean value HLEPOR of all single sentence:', "\n", "$HLEPOR", "\n";
+    print "evaluation value HLEPOR of every single sentence: ", "@HLEPOR_single_sentence", "\n", $i, "\n";
+    print "mean value HLEPOR of all single sentence: ", "$HLEPOR", "\n";
 
     # another way to calculate the mean HLEPOR of system_output (using all sentences' mean parameter-value)
     $HLEPOR_anotherway = 0;
@@ -392,7 +392,7 @@ if (!(-d $cand)) {
             $HLEPOR_anotherway = 0;
     }
 
-    print 'mean value HLEPOR_anotherway of all single sentence:', "\n", "$HLEPOR_anotherway", "\n";
+    print "mean value HLEPOR_anotherway of all single sentence: ", "$HLEPOR_anotherway", "\n";
 
     # close TEST; 
     # close REF;
