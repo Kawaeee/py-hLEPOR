@@ -29,7 +29,7 @@ class HLEPOR(object):
             value = str(i.group(2)).strip().split()
             data[label] = value
         
-        json_output = json.dumps(data)
+        json_output = json.dumps(data,ensure_ascii=False)
         return json_output
 
 
