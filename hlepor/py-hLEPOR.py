@@ -1,3 +1,4 @@
+import json
 import os
 import re
 import random
@@ -18,16 +19,17 @@ class HLEPOR(object):
         hlepor_regex = r"(.*):(.*)"
         matches = re.finditer(hlepor_regex, stdout, re.MULTILINE)
 
-        json_output = {}
-        json_output["id"] = random.randint(0, 999)
-        json_output["reference_sentence"] = ref_list
-        json_output["candidate_sentence"] = cand_list
+        data = {}
+        data["id"] = random.randint(0, 999)
+        data["reference_sentence"] = ref_list
+        data["candidate_sentence"] = cand_list
 
         for i in matches:
             label = str(i.group(1)).strip().replace(" ", "_").lower()
             value = str(i.group(2)).strip().split()
-            json_output[label] = value
-            
+            data[label] = value
+        
+        json_output = json.dumps(data)
         return json_output
 
 
