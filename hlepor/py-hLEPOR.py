@@ -12,7 +12,7 @@ hlepor_path = "hlepor/hlepor.perl"
 class HLEPOR(object):
     def __init__(self, cmd):
         self.cmd = cmd
-        self.proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, shell=True)
+        self.proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, shell=False)
 
     def generate_json(self, ref_list, cand_list, raw_stdout):
         stdout = raw_stdout.decode("utf-8").replace(r"\n", "\n")
